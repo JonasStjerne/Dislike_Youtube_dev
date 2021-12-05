@@ -24,17 +24,16 @@ function youtube_parser(url){
 var videoId = youtube_parser(window.location.href);
 httpGetAsync(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${apiKey}`,
 (result) => {
-    result = JSON.parse(result);
-    console.log(result);
-    var videoInfo = result.items[0].statistics;
-    var likeElement = document.evaluate("//yt-formatted-string[contains(., 'Kan ikke lide')]", document, null, XPathResult.ANY_TYPE, null );
-    var ThisElement = likeElement.iterateNext();
+    resultParsed = JSON.parse(result);
+    let videoInfo = resultParsed.items[0].statistics;
+
+    let likeElement = document.evaluate("//yt-formatted-string[contains(., 'Kan ikke lide')]", document, null, XPathResult.ANY_TYPE, null );
+    let ThisElement = likeElement.iterateNext();
+
     ThisElement.innerHTML = videoInfo.dislikeCount;
+    let rationNumber = (videoInfo.likeCount/(videoInfo.likeCount + videoInfo.dislikeCount) * 100).toFixed(0);
+    var ratioElement = document.createElement("p");
+    var ratioText = document.createTextNode(rationNumber+ "% likes");
+    ratioElement.appendChild(ratioText);
+    ThisElement.appendChild(ratioElement);
 })
-
-// console.log(document.getElementById("top-level-buttons-computed").childNodes);
-// document.getElementById("top-level-buttons-computed").children[1].children[0].children[1].innerHTML =videoInfo.dislikeCount;
-
-
-
-
