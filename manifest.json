@@ -2,11 +2,14 @@
     "name": "Dislike_Youtube",
     "version": "69",
     "description": "Get dislikes on youtube videos",
-    "permissions": ["storage", "declarativeContent", "activeTab"],
+    "permissions": ["declarativeContent", "activeTab", "tabs", "scripting"],
+    "background": {
+        "scripts":["background.js"]
+      },
     "content_scripts": [
         {
             "matches": [
-                "https://www.youtube.com/watch*"
+                "https://www.youtube.com/watch?*"
             ] ,
             "js": [
                 "content.js"
@@ -14,5 +17,5 @@
             "run_at": "document_end"
         }
     ],
-    "manifest_version": 2
+    "manifest_version": 3
 }
