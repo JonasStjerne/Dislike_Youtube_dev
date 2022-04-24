@@ -1,5 +1,4 @@
-//'AIzaSyD80-B-IVojiKipon2pXqUd8uO5VCu4p84'
-const apiKey = 'AIzaSyD80-B-IVojiKipon2pXqUd8uO5VCu4p84'
+const apiKey = YOUR_API_KEY
 
 function httpGetAsync(theUrl, callback)
 {
